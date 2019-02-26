@@ -16,6 +16,7 @@ Files are moved if all constraints are met:
 | Name | Description |
 |-|-|
 | BUCKET_NAME | (Required) Name of the bucket to process |
+| TIMEOUT | Function timeout in seconds, defaults to 30 |
 
 ## License
 

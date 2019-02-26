@@ -2,10 +2,13 @@
 import boto3
 import os
 import re
+import time
 
 response = []
+start_time = time.time()
 
 bucket = os.environ['BUCKET_NAME']
+timeout = int(os.environ['TIMEOUT']) if 'TIMEOUT' in os.environ else 30
 
 s3 = boto3.client('s3')
 
@@ -41,6 +44,10 @@ def process_objects(continue_token=''):
                 'MetadataDirective': 'COPY'
             }
         )
+
+        if time.time() - start_time >= timeout:
+            print('Timeout - stopping function, transition will continue in next run')
+            return
 
     if 'NextContinuationToken' in objects:
         process_objects(objects['NextContinuationToken'])
