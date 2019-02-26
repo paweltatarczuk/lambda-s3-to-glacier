@@ -10,6 +10,7 @@ Files are moved if all constraints are met:
 - Bigger than 128KB
 - Not ending with `.manifest` or `.manifest.gpg`
 - Storage class is 'STANDARD'
+- Older than 1 day
 
 ## Environment variables
 

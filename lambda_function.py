@@ -27,6 +27,10 @@ def process_objects(continue_token=''):
             response.append('Skipping %s - smaller than 128KB' % (obj['Key'],))
             continue
 
+        if start_time - obj['LastModified'].timestamp() < 86400:
+            response.append('Skipping %s - newer than 1 day' % (obj['Key'],))
+            continue
+
         if re.search(r'\.manifest(\.gpg)?$', obj['Key']):
             response.append('Skipping %s - manifest file' % (obj['Key'],))
             continue
